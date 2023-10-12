@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "647124052824",
+    "project_id": "test-map-3dfef",
+    "storage_bucket": "test-map-3dfef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647124052824:android:126319f083acfdb2f8132d",
+        "android_client_info": {
+          "package_name": "com.example.test_map"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4yhuIJcsBpt1juW8RsrUbSZQ1nw-Gxzo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
