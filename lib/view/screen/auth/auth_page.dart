@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +9,7 @@ import 'package:test_map/view/widget/auth_widet/auth_top_text.dart';
 import 'package:test_map/view/widget/auth_widet/country_code.dart';
 import 'package:test_map/view/widget/auth_widet/custom_text_form_field.dart';
 
+@RoutePage()
 class AuthPage extends ConsumerWidget {
   const AuthPage({super.key});
 
@@ -25,6 +27,7 @@ class AuthPage extends ConsumerWidget {
               const SliverToBoxAdapter(child: AuthTopText()),
               SliverToBoxAdapter(
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Expanded(flex: 1, child: CountryCode()),
                     SizedBox(width: 10.w),

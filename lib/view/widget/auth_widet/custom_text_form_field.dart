@@ -28,7 +28,10 @@ class CustomTextFormField extends ConsumerWidget {
           provider.phoneNumber = phoneNumber!.trim();
         },
         decoration: const InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 15,
+            ),
             hintText: AppStrings.enterYourNumber,
             border: OutlineInputBorder()),
       ),

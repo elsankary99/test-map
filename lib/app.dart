@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:test_map/view/screen/auth/auth_page.dart';
+import 'package:test_map/view/screen/auth/otp_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       builder: (_, child) {
         return const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: AuthPage(),
+          home: OTPPage(),
         );
       },
     );
