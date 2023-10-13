@@ -23,7 +23,7 @@ class OTPPage extends ConsumerWidget {
             SliverToBoxAdapter(child: SizedBox(height: 80.h)),
             SliverToBoxAdapter(
               child: CustomButton(
-                title: AppStrings.next,
+                title: AppStrings.verify,
                 onPressed: () async {},
               ),
             )
