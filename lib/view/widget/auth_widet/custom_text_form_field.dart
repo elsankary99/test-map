@@ -1,19 +1,37 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:test_map/core/constant/app_strings.dart';
+import 'package:test_map/provider/auth_provider/auth_provider.dart';
 
-class CustomTextFormField extends StatelessWidget {
+class CustomTextFormField extends ConsumerWidget {
   const CustomTextFormField({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      keyboardType: TextInputType.phone,
-      decoration: const InputDecoration(
-          contentPadding: EdgeInsets.symmetric(horizontal: 16),
-          hintText: AppStrings.enterYourNumber,
-          border: OutlineInputBorder()),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.read(authProvider.notifier);
+    return Form(
+      key: provider.phoneForm,
+      child: TextFormField(
+        keyboardType: TextInputType.phone,
+        validator: (value) {
+          if (value!.trim().isEmpty) {
+            return AppStrings.pleaseEnterYourPhoneErr;
+          }
+          if (value.trim().length < 11) {
+            return AppStrings.phoneNumberDigitErr;
+          }
+          return null;
+        },
+        onSaved: (phoneNumber) {
+          provider.phoneNumber = phoneNumber!.trim();
+        },
+        decoration: const InputDecoration(
+            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            hintText: AppStrings.enterYourNumber,
+            border: OutlineInputBorder()),
+      ),
     );
   }
 }

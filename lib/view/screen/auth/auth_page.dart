@@ -1,14 +1,19 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_map/core/constant/app_strings.dart';
+import 'package:test_map/core/widget/custom_button.dart';
+import 'package:test_map/provider/auth_provider/auth_provider.dart';
 import 'package:test_map/view/widget/auth_widet/auth_top_text.dart';
 import 'package:test_map/view/widget/auth_widet/country_code.dart';
 import 'package:test_map/view/widget/auth_widet/custom_text_form_field.dart';
 
-class AuthPage extends StatelessWidget {
+class AuthPage extends ConsumerWidget {
   const AuthPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.read(authProvider.notifier);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -19,31 +24,21 @@ class AuthPage extends StatelessWidget {
             slivers: [
               const SliverToBoxAdapter(child: AuthTopText()),
               SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 45.h,
-                  child: Row(
-                    children: [
-                      const Expanded(flex: 1, child: CountryCode()),
-                      SizedBox(width: 10.w),
-                      const Expanded(flex: 3, child: CustomTextFormField()),
-                    ],
-                  ),
+                child: Row(
+                  children: [
+                    const Expanded(flex: 1, child: CountryCode()),
+                    SizedBox(width: 10.w),
+                    const Expanded(flex: 3, child: CustomTextFormField()),
+                  ],
                 ),
               ),
               SliverToBoxAdapter(child: SizedBox(height: 80.h)),
               SliverToBoxAdapter(
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: SizedBox(
-                    width: 85.w,
-                    height: 40.h,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black),
-                      child: const Text("Next"),
-                    ),
-                  ),
+                child: CustomButton(
+                  title: AppStrings.next,
+                  onPressed: () async {
+                    await provider.signUpWithPhoneNumber();
+                  },
                 ),
               )
             ],
