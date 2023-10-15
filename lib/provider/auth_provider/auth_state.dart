@@ -8,7 +8,9 @@ class AuthInitial extends AuthState {}
 
 class AuthLoading extends AuthState {}
 
-class AuthDataFetched extends AuthState {}
+class PhoneOtpVerified extends AuthState {}
+
+class PhoneNumberSubmitted extends AuthState {}
 
 class AuthError extends AuthState {
   final String message;
