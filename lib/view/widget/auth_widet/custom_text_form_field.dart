@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_map/core/constant/app_strings.dart';
 import 'package:test_map/provider/auth_provider/auth_provider.dart';
 
@@ -27,13 +28,13 @@ class CustomTextFormField extends ConsumerWidget {
         onSaved: (phoneNumber) {
           provider.phoneNumber = phoneNumber!.trim();
         },
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(
               horizontal: 16,
-              vertical: 15,
+              vertical: 14.h,
             ),
             hintText: AppStrings.enterYourNumber,
-            border: OutlineInputBorder()),
+            border: const OutlineInputBorder()),
       ),
     );
   }

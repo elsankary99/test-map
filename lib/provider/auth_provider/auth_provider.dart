@@ -57,7 +57,7 @@ class AuthProvider extends StateNotifier<AuthState> {
 
   Future<void> submitOtp() async {
     log("submitOtp $otpCode");
-
+    state = SubmitLoading();
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationId, smsCode: otpCode!);
     await signIn(credential);
@@ -78,7 +78,7 @@ class AuthProvider extends StateNotifier<AuthState> {
     await FirebaseAuth.instance.signOut();
   }
 
-  User getLoggedInUser() {
+  User get getLoggedInUser {
     return FirebaseAuth.instance.currentUser!;
   }
 }

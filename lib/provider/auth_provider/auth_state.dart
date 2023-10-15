@@ -8,6 +8,8 @@ class AuthInitial extends AuthState {}
 
 class AuthLoading extends AuthState {}
 
+class SubmitLoading extends AuthState {}
+
 class PhoneOtpVerified extends AuthState {}
 
 class PhoneNumberSubmitted extends AuthState {}

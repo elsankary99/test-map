@@ -59,7 +59,9 @@ class AuthPage extends ConsumerWidget {
                     // router.push(const OTPRoute());
                   },
                   child: state is AuthLoading
-                      ? const CircularProgressIndicator()
+                      ? const CircularProgressIndicator(
+                          color: Colors.white,
+                        )
                       : null,
                 ),
               )
