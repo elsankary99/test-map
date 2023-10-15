@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_map/core/constant/app_strings.dart';
 import 'package:test_map/core/widget/custom_button.dart';
+import 'package:test_map/provider/auth_provider/auth_provider.dart';
 import 'package:test_map/view/widget/auth_widet/otp_code_field.dart';
 import 'package:test_map/view/widget/auth_widet/otp_top_text.dart';
 
@@ -13,6 +14,9 @@ class OTPPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // final state = ref.watch(authProvider);
+    final provider = ref.read(authProvider.notifier);
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -24,7 +28,9 @@ class OTPPage extends ConsumerWidget {
             SliverToBoxAdapter(
               child: CustomButton(
                 title: AppStrings.verify,
-                onPressed: () async {},
+                onPressed: () async {
+                  await provider.submitOtp();
+                },
               ),
             )
           ],

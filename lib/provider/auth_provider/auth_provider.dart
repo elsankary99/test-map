@@ -13,6 +13,7 @@ class AuthProvider extends StateNotifier<AuthState> {
   AuthProvider() : super(AuthInitial());
 
   String? phoneNumber;
+  String? otpCode;
   late String verificationId;
   GlobalKey<FormState> phoneForm = GlobalKey<FormState>();
 
@@ -54,11 +55,11 @@ class AuthProvider extends StateNotifier<AuthState> {
     log("codeAutoRetrievalTimeout");
   }
 
-  Future<void> submitOtp(String otpCode) async {
+  Future<void> submitOtp() async {
     log("submitOtp $otpCode");
 
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: verificationId, smsCode: otpCode);
+        verificationId: verificationId, smsCode: otpCode!);
     await signIn(credential);
   }
 

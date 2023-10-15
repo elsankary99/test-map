@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
+import 'package:test_map/provider/auth_provider/auth_provider.dart';
 
 class OTPCodeField extends ConsumerWidget {
   const OTPCodeField({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.read(authProvider.notifier);
+
     final defaultPinTheme = PinTheme(
       width: 45.w,
       height: 56.h,
@@ -41,11 +44,14 @@ class OTPCodeField extends ConsumerWidget {
       focusedPinTheme: focusedPinTheme,
       submittedPinTheme: submittedPinTheme,
       validator: (s) {
-        return s == '2222' ? null : 'Pin is incorrect';
+        return s!.isNotEmpty ? null : 'Please Enter Otp Code';
       },
       pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
       showCursor: true,
-      onCompleted: (pin) => log(pin),
+      onCompleted: (otpCode) {
+        log(otpCode);
+        provider.otpCode = otpCode;
+      },
     );
   }
 }
