@@ -37,8 +37,10 @@ dependencies:
   flutter_riverpod: ^2.4.3
   flutter_screenutil: ^5.9.0
   fluttertoast: ^8.2.2
+  font_awesome_flutter: ^10.6.0
   geolocator: ^10.1.0
   google_maps_flutter: ^2.5.0
+  material_floating_search_bar_2: ^0.5.0
   pinput: ^3.0.1
 
 dev_dependencies:
