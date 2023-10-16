@@ -37,6 +37,7 @@ dependencies:
   flutter_riverpod: ^2.4.3
   flutter_screenutil: ^5.9.0
   fluttertoast: ^8.2.2
+  google_maps_flutter: ^2.5.0
   pinput: ^3.0.1
 
 dev_dependencies:
