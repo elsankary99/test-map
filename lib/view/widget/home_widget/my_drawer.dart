@@ -20,8 +20,6 @@ class MyDrawer extends ConsumerWidget {
               "assets/images/logo.png",
               color: Colors.white,
               height: 100.h,
-              // width: 80,
-              // fit: BoxFit.fill,
             ),
           ),
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:test_map/core/function/url_luncher.dart';
 import 'package:test_map/view/widget/home_widget/social_media_widget.dart';
 
 class FollowMeWidget extends StatelessWidget {
@@ -20,15 +21,19 @@ class FollowMeWidget extends StatelessWidget {
             style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600),
           ),
         ),
-        const Row(
+        Row(
           children: [
             SocialMediaWidget(
+              onPressed: () => moveToUrl(""),
               icon: FontAwesomeIcons.squareFacebook,
             ),
             SocialMediaWidget(
+              onPressed: () => moveToUrl(""),
               icon: FontAwesomeIcons.telegram,
             ),
             SocialMediaWidget(
+              onPressed: () => moveToUrl(
+                  "https://www.linkedin.com/in/ahmed-ebrahim-bbb968262/"),
               icon: FontAwesomeIcons.linkedin,
             ),
           ],

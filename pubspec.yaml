@@ -42,6 +42,7 @@ dependencies:
   google_maps_flutter: ^2.5.0
   material_floating_search_bar_2: ^0.5.0
   pinput: ^3.0.1
+  url_launcher: ^6.1.14
 
 dev_dependencies:
   auto_route_generator: ^7.3.1
