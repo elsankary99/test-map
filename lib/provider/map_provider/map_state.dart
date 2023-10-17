@@ -14,3 +14,13 @@ class MapError extends MapState {
   final String message;
   const MapError(this.message);
 }
+
+//* get current location
+class GetCurrentLocationLoading extends MapState {}
+
+class GetCurrentLocationSuccess extends MapState {}
+
+class GetCurrentLocationError extends MapState {
+  final String message;
+  const GetCurrentLocationError(this.message);
+}
