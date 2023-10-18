@@ -6,21 +6,19 @@ abstract class MapState {
 
 class MapInitial extends MapState {}
 
-class MapLoading extends MapState {}
+//* get place details
+class GetPlaceDetailsLoading extends MapState {}
 
-class MapDataFetched extends MapState {}
+class GetPlaceDetailsSuccess extends MapState {
+  final Location location;
 
-class MapError extends MapState {
-  final String message;
-  const MapError(this.message);
+  GetPlaceDetailsSuccess({required this.location});
 }
 
-//* get current location
-class GetCurrentLocationLoading extends MapState {}
-
-class GetCurrentLocationSuccess extends MapState {}
-
-class GetCurrentLocationError extends MapState {
+class GetPlaceDetailsError extends MapState {
   final String message;
-  const GetCurrentLocationError(this.message);
+  const GetPlaceDetailsError(this.message);
 }
+
+//* get place details
+class AddMarker extends MapState {}

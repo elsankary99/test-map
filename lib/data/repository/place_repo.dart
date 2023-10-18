@@ -38,7 +38,7 @@ class PlaceRepo {
       "key": AppStrings.apiKey,
     });
 
-    final data = res.data["result"];
+    final data = res.data["result"] as Map<String, dynamic>;
     log("=data:=$data==");
     return PlaceDetailsModel.fromJson(data);
   }
