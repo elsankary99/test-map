@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
+import 'package:test_map/provider/auto_complete_provider/auto_complete_provider.dart';
 import 'package:test_map/provider/map_provider/map_provider.dart';
 
 class FloatingSearchBarWidget extends ConsumerWidget {
@@ -14,7 +16,7 @@ class FloatingSearchBarWidget extends ConsumerWidget {
         MediaQuery.of(context).orientation == Orientation.portrait;
 
     return FloatingSearchBar(
-      // margins: const EdgeInsets.only(top: 50),
+      margins: EdgeInsets.only(top: 40.h, left: 16.w, right: 16.w),
       controller: provider.controller,
       hint: 'Search...',
       scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
@@ -26,7 +28,7 @@ class FloatingSearchBarWidget extends ConsumerWidget {
       width: isPortrait ? 600 : 500,
       debounceDelay: const Duration(milliseconds: 500),
       onQueryChanged: (query) {
-        // Call your model, bloc, controller here.
+        ref.read(inputProvider.notifier).state = query;
       },
       // Specify a custom transition to be used for
       // animating between opened and closed stated.
@@ -46,13 +48,40 @@ class FloatingSearchBarWidget extends ConsumerWidget {
       builder: (context, transition) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: const Material(
+          child: Material(
             color: Colors.white,
             elevation: 4.0,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [],
-            ),
+            child: ref.watch(autoCompleteProvider).when(
+                  data: (data) {
+                    if (data.isNotEmpty) {
+                      return SizedBox(
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                          physics: const ClampingScrollPhysics(),
+                          itemCount: data.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              leading: const CircleAvatar(
+                                child: Icon(Icons.place),
+                              ),
+                              title: Text(data[index].description!),
+                              shape: Border(
+                                  bottom: BorderSide(
+                                      color: Colors.grey[300]!, width: 2)),
+                            );
+                          },
+                        ),
+                      );
+                    }
+                    return const SizedBox();
+                  },
+                  error: (error, stackTrace) =>
+                      Center(child: Text(error.toString())),
+                  loading: () => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
           ),
         );
       },
