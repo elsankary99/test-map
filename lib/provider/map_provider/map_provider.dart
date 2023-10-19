@@ -5,6 +5,7 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
+import 'package:test_map/data/model/autocomplete_place_model/autocomplete_place_model.dart';
 import 'package:test_map/data/model/direction_place_model/direction_place_model.dart';
 import 'package:test_map/data/model/place_details_model/place_details_model.dart';
 import 'package:test_map/data/repository/place_repo.dart';
@@ -23,9 +24,11 @@ class MapProvider extends StateNotifier<MapState> {
   MapProvider(this.repo) : super(MapInitial());
   List<PointLatLng> result = [];
   final PlaceRepo repo;
+
   final Completer<GoogleMapController> mapController = Completer();
   bool showDirectionDuration = false;
   bool hideDirectionDurationIcon = true;
+  AutocompletePlaceModel? model;
   void hideDirectionDuration(bool hide) {
     log("hide:$hide");
     hideDirectionDurationIcon = hide;
@@ -93,10 +96,14 @@ class MapProvider extends StateNotifier<MapState> {
         log("showDirectionDuration");
       },
       position: LatLng(location.lat!, location.lng!),
-      infoWindow: const InfoWindow(title: "searched location"),
+      infoWindow: InfoWindow(title: model!.description),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
     );
     addMarker(marker);
+  }
+
+  getPlaceName(AutocompletePlaceModel model) {
+    this.model = model;
   }
 
   void addMarker(Marker marker) {

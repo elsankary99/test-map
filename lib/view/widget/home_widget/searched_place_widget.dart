@@ -20,6 +20,9 @@ class SearchedPlaceWidget extends ConsumerWidget {
         provider.showDirectionDuration = false;
         provider.controller.close();
         provider.markers.clear();
+        provider.result.clear();
+        provider.getPlaceName(placeModel);
+
         await provider.getPlaceDetails(placeModel.placeId!);
         // ref.read(placeIdProvider.notifier).state = placeModel.placeId!;
       },
