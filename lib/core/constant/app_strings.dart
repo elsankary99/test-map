@@ -6,6 +6,8 @@ class AppStrings {
           "https://maps.googleapis.com/maps/api/place/autocomplete/json",
       placeDetailsBaseUrl =
           "https://maps.googleapis.com/maps/api/place/details/json",
+      directionPlaceBaseUrl =
+          "https://maps.googleapis.com/maps/api/directions/json",
       pleaseEnterYourNumber =
           "Please enter your phone number to verify \nyour account",
       enterYourNumber = "enter your number",

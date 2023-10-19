@@ -20,8 +20,8 @@ class MapPage extends ConsumerWidget {
           customToast(title: next.message, color: Colors.red);
         }
         if (next is GetPlaceDetailsSuccess) {
-          provider.buildSearchedPlaceMarker(next.location);
-          await provider.goToMySearchedLocation(next.location);
+          provider.buildSearchedPlaceMarker(next.place);
+          await provider.goToMySearchedLocation(next.place);
         }
       },
     );

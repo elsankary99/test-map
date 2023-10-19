@@ -10,9 +10,9 @@ class MapInitial extends MapState {}
 class GetPlaceDetailsLoading extends MapState {}
 
 class GetPlaceDetailsSuccess extends MapState {
-  final Location location;
+  final PlaceDetailsModel place;
 
-  GetPlaceDetailsSuccess({required this.location});
+  GetPlaceDetailsSuccess({required this.place});
 }
 
 class GetPlaceDetailsError extends MapState {
