@@ -22,3 +22,17 @@ class GetPlaceDetailsError extends MapState {
 
 //* get place details
 class AddMarker extends MapState {}
+
+//* get direction place
+class DirectionPlaceLoading extends MapState {}
+
+class DirectionPlaceSuccess extends MapState {
+  final DirectionPlaceModel direction;
+
+  DirectionPlaceSuccess({required this.direction});
+}
+
+class DirectionPlaceError extends MapState {
+  final String message;
+  const DirectionPlaceError(this.message);
+}

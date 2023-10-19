@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
+import 'package:test_map/data/model/direction_place_model/direction_place_model.dart';
 import 'package:test_map/data/model/place_details_model/place_details_model.dart';
 import 'package:test_map/data/repository/place_repo.dart';
 import 'package:test_map/helper/location_helper.dart';
@@ -86,5 +87,22 @@ class MapProvider extends StateNotifier<MapState> {
   void addMarker(Marker marker) {
     markers.add(marker);
     state = AddMarker();
+  }
+
+  //! Direction Place
+  Future<void> getDirectionPlace(PlaceDetailsModel place) async {
+    state = DirectionPlaceLoading();
+
+    try {
+      final location = place.geometry!.location!;
+      final origin = await LocationHelper.getCurrentLocation();
+      final direction = await repo.directionPlace(
+        destination: LatLng(location.lat!, location.lng!),
+        origin: LatLng(origin.latitude, origin.longitude),
+      );
+      state = DirectionPlaceSuccess(direction: direction);
+    } catch (e) {
+      state = DirectionPlaceError(e.toString());
+    }
   }
 }
