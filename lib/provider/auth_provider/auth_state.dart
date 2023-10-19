@@ -14,6 +14,8 @@ class PhoneOtpVerified extends AuthState {}
 
 class PhoneNumberSubmitted extends AuthState {}
 
+class LogOut extends AuthState {}
+
 class AuthError extends AuthState {
   final String message;
   const AuthError(this.message);

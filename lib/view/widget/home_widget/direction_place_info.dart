@@ -18,14 +18,18 @@ class DirectionPlaceInfoWidget extends StatelessWidget {
           child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          SizedBox(width: 4.w),
           Icon(
             icon,
             color: Colors.blue,
             size: 30.sp,
           ),
-          Text(
-            title,
-            style: TextStyle(fontSize: 16.sp),
+          SizedBox(width: 4.w),
+          Expanded(
+            child: Text(
+              title,
+              style: TextStyle(fontSize: 16.sp),
+            ),
           )
         ],
       )),

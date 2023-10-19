@@ -76,6 +76,7 @@ class AuthProvider extends StateNotifier<AuthState> {
 
   Future<void> logOut() async {
     await FirebaseAuth.instance.signOut();
+    state = LogOut();
   }
 
   User get getLoggedInUser {
