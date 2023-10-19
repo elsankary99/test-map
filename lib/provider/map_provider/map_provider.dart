@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
@@ -20,7 +21,7 @@ final mapProvider = StateNotifierProvider<MapProvider, MapState>((ref) {
 
 class MapProvider extends StateNotifier<MapState> {
   MapProvider(this.repo) : super(MapInitial());
-
+  List<PointLatLng> result = [];
   final PlaceRepo repo;
   final Completer<GoogleMapController> mapController = Completer();
   bool showDirectionDuration = false;
@@ -33,7 +34,7 @@ class MapProvider extends StateNotifier<MapState> {
 
   FloatingSearchBarController controller = FloatingSearchBarController();
   Set<Marker> markers = {};
-
+  DirectionPlaceModel? direction;
   Future<void> moveToMyCurrentPosition() async {
     final position = await LocationHelper.getCurrentLocation();
     GoogleMapController controller = await mapController.future;
@@ -114,11 +115,28 @@ class MapProvider extends StateNotifier<MapState> {
         destination: LatLng(location.lat!, location.lng!),
         origin: LatLng(origin.latitude, origin.longitude),
       );
+      this.direction = direction;
+      polylinePoints(direction);
       state = DirectionPlaceSuccess(direction: direction);
       log("DirectionPlaceSuccess");
     } catch (e) {
       state = DirectionPlaceError(e.toString());
       log("DirectionPlace: ${e.toString()}");
     }
+  }
+
+  void polylinePoints(DirectionPlaceModel direction) {
+    log("result :: ${this.result}");
+
+    List<PointLatLng> result =
+        PolylinePoints().decodePolyline(direction.overviewPolyline!.points!);
+    this.result = result;
+    polyLineRoad();
+    log("result :: ${this.result}");
+  }
+
+  List<LatLng> polyLineRoad() {
+    final road = result.map((e) => LatLng(e.latitude, e.longitude)).toList();
+    return road;
   }
 }

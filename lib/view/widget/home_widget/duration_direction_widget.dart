@@ -19,12 +19,15 @@ class DistanceAndDurationWidget extends ConsumerWidget {
           : false,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            DirectionPlaceInfoWidget(icon: Icons.time_to_leave, title: " 3 km"),
             DirectionPlaceInfoWidget(
-                icon: Icons.access_time_filled_sharp, title: " 3 houer"),
+                icon: Icons.time_to_leave,
+                title: provider.direction?.legs![0].distance!.text! ?? ""),
+            DirectionPlaceInfoWidget(
+                icon: Icons.access_time_filled_sharp,
+                title: provider.direction?.legs![0].duration!.text! ?? ""),
           ],
         ),
       ),

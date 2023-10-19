@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -26,7 +24,6 @@ class PlaceRepo {
     });
 
     final data = res.data["predictions"] as List;
-    log("=data:=$data==");
     return data.map((e) => AutocompletePlaceModel.fromJson(e)).toList();
   }
 
@@ -41,7 +38,6 @@ class PlaceRepo {
     });
 
     final data = res.data["result"] as Map<String, dynamic>;
-    log("=data:=$data==");
     return PlaceDetailsModel.fromJson(data);
   }
 
@@ -58,7 +54,6 @@ class PlaceRepo {
     );
 
     final data = res.data["routes"][0] as Map<String, dynamic>;
-    log("=directionPlace:=$data==");
     return DirectionPlaceModel.fromJson(data);
   }
 }

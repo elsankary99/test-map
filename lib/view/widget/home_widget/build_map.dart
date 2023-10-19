@@ -29,6 +29,16 @@ class BuildMap extends ConsumerWidget {
             onMapCreated: (GoogleMapController controller) {
               provider.mapController.complete(controller);
             },
+            polylines: provider.showDirectionDuration
+                ? {
+                    Polyline(
+                      polylineId: const PolylineId("poly1"),
+                      color: Colors.blue,
+                      width: 8,
+                      points: provider.polyLineRoad(),
+                    )
+                  }
+                : {},
           ),
           error: (error, stackTrace) => Center(child: Text("$error")),
           loading: () => const Center(child: CircularProgressIndicator()),

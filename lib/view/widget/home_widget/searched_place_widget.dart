@@ -19,6 +19,7 @@ class SearchedPlaceWidget extends ConsumerWidget {
         log("place id :${placeModel.placeId!}");
         provider.showDirectionDuration = false;
         provider.controller.close();
+        provider.markers.clear();
         await provider.getPlaceDetails(placeModel.placeId!);
         // ref.read(placeIdProvider.notifier).state = placeModel.placeId!;
       },
