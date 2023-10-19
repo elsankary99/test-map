@@ -23,6 +23,11 @@ class GetPlaceDetailsError extends MapState {
 //* get place details
 class AddMarker extends MapState {}
 
+//* get place details
+class ShowDirectionDuration extends MapState {}
+
+class HideDirectionDuration extends MapState {}
+
 //* get direction place
 class DirectionPlaceLoading extends MapState {}
 

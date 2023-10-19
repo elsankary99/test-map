@@ -26,6 +26,9 @@ class FloatingSearchBarWidget extends ConsumerWidget {
       physics: const BouncingScrollPhysics(),
       axisAlignment: isPortrait ? 0.0 : -1.0,
       openAxisAlignment: 0.0,
+      onFocusChanged: (d) {
+        provider.hideDirectionDuration(!d);
+      },
       width: isPortrait ? 600 : 500,
       debounceDelay: const Duration(milliseconds: 500),
       onQueryChanged: (query) {

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -13,6 +14,7 @@ part 'map_state.dart';
 
 final mapProvider = StateNotifierProvider<MapProvider, MapState>((ref) {
   final repo = ref.read(placeRepoProvider);
+
   return MapProvider(repo);
 });
 
@@ -21,6 +23,13 @@ class MapProvider extends StateNotifier<MapState> {
 
   final PlaceRepo repo;
   final Completer<GoogleMapController> mapController = Completer();
+  bool showDirectionDuration = false;
+  bool hideDirectionDurationIcon = true;
+  void hideDirectionDuration(bool hide) {
+    log("hide:$hide");
+    hideDirectionDurationIcon = hide;
+    state = HideDirectionDuration();
+  }
 
   FloatingSearchBarController controller = FloatingSearchBarController();
   Set<Marker> markers = {};
@@ -76,7 +85,12 @@ class MapProvider extends StateNotifier<MapState> {
 
     Marker marker = Marker(
       markerId: const MarkerId("1"),
-      onTap: () {},
+      onTap: () {
+        showDirectionDuration = true;
+        state = ShowDirectionDuration();
+
+        log("showDirectionDuration");
+      },
       position: LatLng(location.lat!, location.lng!),
       infoWindow: const InfoWindow(title: "searched location"),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
@@ -92,7 +106,7 @@ class MapProvider extends StateNotifier<MapState> {
   //! Direction Place
   Future<void> getDirectionPlace(PlaceDetailsModel place) async {
     state = DirectionPlaceLoading();
-
+    log("DirectionPlaceLoading");
     try {
       final location = place.geometry!.location!;
       final origin = await LocationHelper.getCurrentLocation();
@@ -101,8 +115,10 @@ class MapProvider extends StateNotifier<MapState> {
         origin: LatLng(origin.latitude, origin.longitude),
       );
       state = DirectionPlaceSuccess(direction: direction);
+      log("DirectionPlaceSuccess");
     } catch (e) {
       state = DirectionPlaceError(e.toString());
+      log("DirectionPlace: ${e.toString()}");
     }
   }
 }

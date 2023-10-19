@@ -18,6 +18,7 @@ class BuildMap extends ConsumerWidget {
     ref.watch(mapProvider);
     return ref.watch(currentFutureProvider).when(
           data: (data) => GoogleMap(
+            // polylines: {Polyline(polylineId: polylineId)},
             markers: provider.markers,
             mapType: MapType.normal,
             initialCameraPosition: CameraPosition(

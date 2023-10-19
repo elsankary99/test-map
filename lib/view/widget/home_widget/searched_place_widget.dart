@@ -17,6 +17,7 @@ class SearchedPlaceWidget extends ConsumerWidget {
     return ListTile(
       onTap: () async {
         log("place id :${placeModel.placeId!}");
+        provider.showDirectionDuration = false;
         provider.controller.close();
         await provider.getPlaceDetails(placeModel.placeId!);
         // ref.read(placeIdProvider.notifier).state = placeModel.placeId!;
